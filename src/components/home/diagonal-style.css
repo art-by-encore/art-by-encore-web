@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  overflow-x: hidden;
+}
+.text {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 900;
+  width: max-content;
+  color: transparent;
+  -webkit-text-stroke: 2px #605f5f;
+}
+.section-image-gallery {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  /* background: #fff; */
+  /* background-image: radial-gradient(
+      circle at 30% 90%,
+      rgba(113, 113, 113, 0.03) 0%,
+      rgba(113, 113, 113, 0.03) 25%,
+      transparent 25%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 25% 15%,
+      rgba(119, 119, 119, 0.03) 0%,
+      rgba(119, 119, 119, 0.03) 35%,
+      transparent 35%,
+      transparent 100%
+    ),
+    radial-gradient(
+      circle at 80% 90%,
+      rgba(42, 42, 42, 0.03) 0%,
+      rgba(42, 42, 42, 0.03) 40%,
+      transparent 40%,
+      transparent 100%
+    ),
+    linear-gradient(90deg, #fff, #fff); */
+}
+.section-image-gallery img {
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 20vw;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.particle-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: fade infinite ease-in-out;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 900px) {
+  .section-image-gallery img {
+    top: -60%;
+    left: -50%;
+    width: 30vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .section-image-gallery img {
+    top: -50%;
+    left: -40%;
+    width: 40vw;
+  }
+}

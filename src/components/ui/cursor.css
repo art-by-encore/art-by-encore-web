@@ -1,0 +1,17 @@
+.cursor-images {
+    position: absolute;
+    inset: 0;
+    width: 280px;
+    aspect-ratio: 370px;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@media (max-width:900px) {
+    .cursor-images {
+        width: 100px;
+    }
+
+}

@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --background: #ffffff;
+  --foreground: #171717; */
+  --color-white: #ffffff;
+  --color-orange: #e14807;
+  --color-border: #fff5f5;
+  --color-background: #000000;
+  --color-border-nav: #ffffff4d;
+  --font-nav-16: 16px;
+  --font-nav-16-lh: 16px;
+  --font-title-60: 60px;
+  --font-title-60-lh: 80px;
+  --font-title-80: 80px;
+  --font-title-80-lh: 80px;
+  --font-title-100: 100px;
+  --font-title-100-lh: 100px;
+  --font-title-211: 211.64px;
+  --font-title-211-lh: 211.64px;
+  --font-banner-text: 20px;
+  --font-banner-text-lh: 32px;
+  --font-btn-text: 18px;
+  --font-btn-text-lh: 32px;
+  --font-section-largest: 211.64px;
+  --font-card-title: 30px;
+  --font-card-title-lh: 42px;
+  --font-card-text: 18px;
+  --font-card-text-lh: 30px;
+  --font-aside-text: 24px;
+  --font-aside-text-lh: 36px;
+  --font-footer-title: 16px;
+  --font-footer-title-lh: 21px;
+  --font-footer-text: 16px;
+  --font-footer-text-lh: 24px;
+  --font-footer-copy-text: 16px;
+  --font-footer-copy-text-lh: 18px;
+}
+
+.light {
+  --color-white: #ffffff;
+  --color-orange: #e14807;
+  --color-border: #fff5f5;
+  --color-background: #171717;
+  --color-border-nav: #ffffff4d;
+}
+
+.dark {
+  --color-white: #ffffff;
+  --color-orange: #e14807;
+  --color-border: #fff5f5;
+  --color-background: #171717;
+  --color-border-nav: #ffffff4d;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background);
+  overflow-x: hidden;
+}
+
+body {
+  --sb-track-color: #232e33;
+  --sb-thumb-color: #e14807;
+  --sb-size: 14px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+/* ───────── NAVIGATION ───────── */
+.font-nav-16 {
+  font-size: var(--font-nav-16);
+  line-height: var(--font-nav-16-lh);
+  font-family: var(--font-montserrat-500);
+}
+
+/* ───────── TITLES ───────── */
+.font-title-60 {
+  font-size: var(--font-title-60);
+  line-height: var(--font-title-60-lh);
+  font-family: var(--font-montserrat-700);
+  font-weight: 700;
+}
+
+.font-title-80 {
+  font-size: var(--font-title-80);
+  line-height: var(--font-title-80-lh);
+  font-family: var(--font-montserrat-800);
+  font-weight: 800;
+}
+
+.font-title-100 {
+  font-size: var(--font-title-100);
+  line-height: var(--font-title-100-lh);
+  font-family: var(--font-montserrat-800);
+}
+
+.font-title-211 {
+  font-size: var(--font-title-211);
+  line-height: var(--font-title-211-lh);
+  font-family: var(--font-montserrat-700);
+}
+
+/* ───────── BANNER TEXT ───────── */
+.font-banner-text {
+  font-size: var(--font-banner-text);
+  line-height: var(--font-banner-text-lh);
+  font-family: var(--font-montserrat-500);
+}
+
+/* ───────── BUTTON TEXT ───────── */
+.font-btn-text {
+  font-size: var(--font-btn-text);
+  line-height: var(--font-btn-text-lh);
+  font-family: var(--font-montserrat-500);
+}
+
+/* ───────── CARD TYPOGRAPHY ───────── */
+.font-card-title {
+  font-size: var(--font-card-title);
+  line-height: var(--font-card-title-lh);
+  font-family: var(--font-montserrat-600);
+}
+
+.font-card-text {
+  font-size: var(--font-card-text);
+  line-height: var(--font-card-text-lh);
+  font-family: var(--font-montserrat-400);
+}
+
+/* ───────── ASIDE TEXT ───────── */
+.font-aside-text {
+  font-size: var(--font-aside-text);
+  line-height: var(--font-aside-text-lh);
+  font-family: var(--font-montserrat-500);
+}
+
+/* ───────── FOOTER ───────── */
+.font-footer-title {
+  font-size: var(--font-footer-title);
+  line-height: var(--font-footer-title-lh);
+  font-family: var(--font-montserrat-700);
+}
+
+.font-footer-text {
+  font-size: var(--font-footer-text);
+  line-height: var(--font-footer-text-lh);
+  font-family: var(--font-montserrat-300);
+}
+
+.font-footer-copy-text {
+  font-size: var(--font-footer-copy-text);
+  line-height: var(--font-footer-copy-text-lh);
+  font-family: var(--font-montserrat-300);
+}
+
+.font-largest {
+  font: clamp(1.8rem, clac(7vw + 1rem), 5rem);
+}
+
+.nav-link {
+  position: relative;
+  border: 1px solid transparent;
+  backdrop-filter: blur(0px);
+  transition:
+    border 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+  /* ensures pseudo-element stays contained */
+  will-change: backdrop-filter, opacity;
+}
+
+.nav-link:hover {
+  box-shadow: 2px 3px 1px 0px #e148071f inset;
+  border: 1px solid #ffffff1a;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    backdrop-filter 0.3s ease;
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+  backdrop-filter: blur(20px);
+}
+
+.button {
+  backdrop-filter: blur(20px);
+  box-shadow: 2px 2px 2px 0px #ffffff40 inset;
+  box-shadow: -1px -1px 2px 0px #ffffff40 inset;
+  border: 1px solid #ffffff4d;
+}
+
+.morph-bg-border {
+  border: 1px solid #ffffff4d;
+  backdrop-filter: blur(20px);
+  box-shadow: 2px 2px 2px 0px #ffffff40 inset;
+  box-shadow: -1px -1px 2px 0px #ffffff40 inset;
+}
+
+.morph-bg-30-border {
+  backdrop-filter: blur(30px);
+  box-shadow: 2px 2px 2px 0px #ffffff40 inset;
+  box-shadow: -2px -2px 2px 0px #ffffff40 inset;
+  border: 1px solid #ffffff4d;
+}
+
+.morph-bg {
+  backdrop-filter: blur(20px);
+  box-shadow: 2px 2px 2px 0px #ffffff40 inset;
+  box-shadow: -1px -1px 2px 0px #ffffff40 inset;
+}
+
+.design {
+  max-width: 489px;
+}
+
+.animation {
+  max-width: 626px;
+}
+
+.web-development {
+  max-width: 751px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --font-nav-16: 16px;
+    --font-nav-16-lh: 16px;
+    --font-title-60: 36px;
+    --font-title-60-lh: 48px;
+    --font-title-80: 36px;
+    --font-title-80-lh: 48px;
+    --font-title-100: 40px;
+    --font-title-100-lh: 52px;
+    --font-title-211: 110px;
+    --font-title-211-lh: 122px;
+    --font-banner-text: 18px;
+    --font-banner-text-lh: 28px;
+    --font-btn-text: 18px;
+    --font-btn-text-lh: 32px;
+    --font-section-largest: 211.64px;
+    --font-card-title: 24px;
+    --font-card-title-lh: 36px;
+    --font-card-text: 18px;
+    --font-card-text-lh: 30px;
+    --font-aside-text: 18px;
+    --font-aside-text-lh: 30px;
+    --font-footer-title: 16px;
+    --font-footer-title-lh: 21px;
+    --font-footer-text: 16px;
+    --font-footer-text-lh: 24px;
+    --font-footer-copy-text: 16px;
+    --font-footer-copy-text-lh: 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --font-nav-16: 16px;
+    --font-nav-16-lh: 16px;
+    --font-title-60: 24px;
+    --font-title-60-lh: 36px;
+    --font-title-80: 32px;
+    --font-title-80-lh: 44px;
+    --font-title-100: 30px;
+    --font-title-100-lh: 42px;
+    --font-title-211: 60px;
+    --font-title-211-lh: 72px;
+    --font-banner-text: 16px;
+    --font-banner-text-lh: 24px;
+    --font-btn-text: 16px;
+    --font-btn-text-lh: 24px;
+    --font-section-largest: 211.64px;
+    --font-card-title: 20px;
+    --font-card-title-lh: 32px;
+    --font-card-text: 16px;
+    --font-card-text-lh: 24px;
+    --font-aside-text: 16px;
+    --font-aside-text-lh: 24px;
+    --font-footer-title: 16px;
+    --font-footer-title-lh: 24px;
+    --font-footer-text: 16px;
+    --font-footer-text-lh: 24px;
+    --font-footer-copy-text: 16px;
+    --font-footer-copy-text-lh: 24px;
+  }
+}
+.lg-download {
+  display: none !important;
+}

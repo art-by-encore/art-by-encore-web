@@ -1,0 +1,12 @@
+.loader::before{
+    content: '';
+    inset: 0;
+    position: absolute;
+    background-image:url('/assets/images/web-development.svg');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    mask-image: url('/assets/images/ink.png');
+    mask-size:cover;
+    mask-position: center;
+}
