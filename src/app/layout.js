@@ -1,6 +1,6 @@
 import "./globals.css";
 import { fonts } from "@/fonts/fonts";
-import { SmoothLayout, Header, Footer, LenisSmoothScroll } from "@/components/layout";
+import { SmoothLayout, Header, Footer, LenisSmoothScroll, FloatingButton } from "@/components/layout";
 import { ViewTransitions } from "next-view-transitions";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
@@ -29,8 +29,8 @@ export const metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
-  author:'Art By Encore',
-  publisher:'Art By Encore',
+  author: 'Art By Encore',
+  publisher: 'Art By Encore',
 };
 
 export default function RootLayout({ children }) {
@@ -52,6 +52,7 @@ export default function RootLayout({ children }) {
             <SmoothLayout>
               <Header />
               {children}
+              <FloatingButton />
               <Footer />
               <ToastContainer
                 position="top-right"
