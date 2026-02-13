@@ -84,7 +84,7 @@ const Footer = () => {
                             <Image src="/assets/icons/logo.svg" fill alt="art by encore" />
                         </Link>
 
-                        <Button text="Contact Us" link="/contact-us" />
+                        <Button text="Trust Pilot" isBlank={true} link="https://www.trustpilot.com/review/encoremnd.com?utm_medium=trustbox&utm_source=TrustBoxReviewCollector" />
                     </div>
                     <div className='max-w-[817px] w-full flex flex-col '>
                         <div className='sm:flex flex-row justify-between grid grid-cols-2 gap-[30px]'>

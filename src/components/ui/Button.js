@@ -2,10 +2,10 @@
 import React from 'react';
 import Link from 'next/link';
 const Button = (props) => {
-    const { text, type = "button", action, link = '#' } = props;
+    const { text, type = "button", action, link = '#', isBlank=false } = props;
 
     return (
-        <Link href={link ? link : '#'} onClick={action} className="h-fit morph-bg-border text-white flex justify-between items-center shrink-0 font-btn-text gap-[30px] w-fit py-[8px] rounded-[50px] pl-[24px] pr-[8px]">
+        <Link href={link ? link : '#'} target={isBlank ? '_blank' : '_self'} onClick={action} className="h-fit morph-bg-border text-white flex justify-between items-center shrink-0 font-btn-text gap-[30px] w-fit py-[8px] rounded-[50px] pl-[24px] pr-[8px]">
             {text}
             <span className='sm:w-[40px] sm:h-[40px] w-[32px] h-[32px] rounded-[50%] border-[1px] border-white grid place-content-center'>
                 <svg className='sm:w-[20px] sm:h-[20px] w-[16px] h-[16px]' viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
