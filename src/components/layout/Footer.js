@@ -84,7 +84,7 @@ const Footer = () => {
                             <Image src="/assets/icons/logo.svg" fill alt="art by encore" />
                         </Link>
 
-                        <Button text="Contact Us" />
+                        <Button text="Contact Us" link="/contact-us" />
                     </div>
                     <div className='max-w-[817px] w-full flex flex-col '>
                         <div className='sm:flex flex-row justify-between grid grid-cols-2 gap-[30px]'>
