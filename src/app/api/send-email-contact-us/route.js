@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import path from "path";
+import { createClient } from '@supabase/supabase-js';
 
-export const runtime = "nodejs"; // ensure Node runtime for nodemailer
+export const runtime = "nodejs";
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
 
 export async function POST(req) {
   try {
@@ -23,6 +30,26 @@ export async function POST(req) {
       );
     }
 
+    // ===== PART 1: Save to Supabase =====
+    const { data: supabaseData, error: supabaseError } = await supabase
+      .from('contact_us')
+      .insert([
+        {
+          firstName,
+          lastName,
+          email,
+          message,
+        }
+      ])
+      .select();
+
+    if (supabaseError) {
+      console.error('Supabase error:', supabaseError);
+      // Continue with email even if Supabase fails? Or return error?
+      // I'll continue but log the error
+    }
+
+    // ===== PART 2: Send Email =====
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -35,11 +62,6 @@ export async function POST(req) {
     const imagePath = path.join(process.cwd(), "public/assets/icons/logo.png");
 
     // safe helpers
-    const list = (arr) =>
-      Array.isArray(arr) && arr.length
-        ? arr.map((v) => (typeof v === "string" ? v : v?.label || v?.value || "")).filter(Boolean).join(", ")
-        : "—";
-
     const esc = (v) =>
       String(v ?? "").replace(/[&<>"']/g, (m) => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -128,9 +150,30 @@ export async function POST(req) {
       ],
     };
 
-    const info = await transporter.sendMail(mailOptions);
-    return NextResponse.json({ message: "Email sent successfully", info }, { status: 200 });
+    const emailInfo = await transporter.sendMail(mailOptions);
+
+    // Check if both operations succeeded or if there were issues
+    if (supabaseError) {
+      // Email succeeded but Supabase failed
+      return NextResponse.json({ 
+        message: "Email sent successfully but failed to save to database", 
+        emailInfo,
+        supabaseError: supabaseError.message 
+      }, { status: 207 }); // 207 Multi-Status
+    }
+
+    // Both operations succeeded
+    return NextResponse.json({ 
+      message: "Form submitted successfully and email sent", 
+      emailInfo,
+      data: supabaseData 
+    }, { status: 200 });
+
   } catch (error) {
-    return NextResponse.json({ error: "Failed to send email", details: error.message }, { status: 500 });
+    console.error('Server error:', error);
+    return NextResponse.json(
+      { error: "Failed to process request", details: error.message },
+      { status: 500 }
+    );
   }
 }
