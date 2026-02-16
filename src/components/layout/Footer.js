@@ -52,19 +52,19 @@ const Footer = () => {
         title: "Quick Links",
         urls: [{
             id: 1,
-            url: "/",
+            url: "#",
             text: "Instagram",
             src: "/assets/icons/Instagram.svg"
         },
         {
             id: 2,
-            url: "/",
+            url: "#",
             text: "Facebook",
             src: "/assets/icons/Facebook.svg"
         },
         {
             id: 3,
-            url: "/",
+            url: "mailto:websiteencore@gmail.com",
             text: "Email",
             src: "/assets/icons/EnvelopeSimpleOpen.svg"
         },
