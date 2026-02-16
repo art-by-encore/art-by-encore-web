@@ -43,7 +43,7 @@ const Footer = () => {
         title: "Work Hours",
         urls: [{
             id: 1,
-            url: "/",
+            url: "#",
             text: "Mon- Sat (07:00 - 12:30)"
         },
         ]
