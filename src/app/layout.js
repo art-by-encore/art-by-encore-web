@@ -44,10 +44,10 @@ export default function RootLayout({ children }) {
           className={`${fonts} antialiased`}
         >
           {/* Google Analytics */}
-          <GoogleAnalytics gaId={'G-0HNEQ79ER8'} />
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_GAID || 'G-ZEQRMTJ26S'} />
 
           {/* Google Tag Manager */}
-          <GoogleTagManager gtmId={'GTM-NDTL23C7'} />
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_GTMID || 'GTM-K3Z2SPT7'} />
           <LoaderProvider>
             <SmoothLayout>
               <Header />
