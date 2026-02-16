@@ -69,10 +69,10 @@ const Banner = () => {
                             </p>
                         </FallTextReveal>
                     }
-                    {
+                    {/* {
                         !isLoader &&
                         <Button text="Get Started" />
-                    }
+                    } */}
 
 
                 </div>
