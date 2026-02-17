@@ -81,22 +81,24 @@ const ImageGalleryInt = (props) => {
                 </LightGallery>
 
                 {/* Thumbnail grid with Next.js Image */}
-                <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-[10px] gap-y-[20px] sm:gap-x-[20px] sm:gap-y-[30px]">
+                <div className="columns-[300px] gap-[30px] w-full">
                     {galleryItems?.map((item, index) => (
                         <div
                             key={item.id || index}
                             onClick={() => openGallery(index)}
-                            className="relative w-full sm:h-[350px] h-[250px] md:rounded-[16px] rounded-[10px] overflow-hidden cursor-pointer group"
+                            className="relative w-full rounded-[10px] overflow-hidden cursor-pointer group mb-[30px]"
                         >
                             {isLoading ? (
-                                <ImageSkeleton />
+                                <div className="w-full h-auto">
+                                    <ImageSkeleton />
+                                </div>
                             ) : (
-                                <Image
+                                <img
                                     src={item?.image}
                                     alt={`Gallery image ${item.id}`}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300 z-10"
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    // fill
+                                    className="object-cover group-hover:scale-105 w-full transition-transform duration-300  rounded-[10px] overflow-hidden"
+                                // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />
                             )}
                         </div>
