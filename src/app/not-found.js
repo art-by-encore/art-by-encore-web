@@ -24,7 +24,7 @@ export default function NotFound() {
                         <p className="text-gray-500 text-sm">
                             Need help?
                             <Link
-                                href="/contact"
+                                href="/contact-us"
                                 className="text-orange-500 hover:text-orange-600 font-medium"
                             >
                                 Contact our support team
