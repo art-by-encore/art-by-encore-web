@@ -2066,12 +2066,12 @@ export const seo = {
         metaRobots: "index, follow",
         metaViewport: "width=device-width, initial-scale=1",
         canonicalURL:
-            "https://art-by-encore.vercel.app/",
+            "https://www.artbyencore.com/",
         openGraph: {
             title: "Art By Encore",
             description:
                 "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-            url: "https://art-by-encore.vercel.app/",
+            url: "https://www.artbyencore.com/",
             type: "website",
             image: "/assets/icons/logo.svg",
         },
@@ -2085,12 +2085,12 @@ export const seo = {
         metaRobots: "index, follow",
         metaViewport: "width=device-width, initial-scale=1",
         canonicalURL:
-            "https://art-by-encore.vercel.app/",
+            "https://www.artbyencore.com/blogs",
         openGraph: {
             title: "Art By Encore",
             description:
                 "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-            url: "https://art-by-encore.vercel.app/",
+            url: "https://www.artbyencore.com/blogs",
             type: "website",
             image: "/assets/icons/logo.svg",
         },
@@ -2104,12 +2104,12 @@ export const seo = {
         metaRobots: "index, follow",
         metaViewport: "width=device-width, initial-scale=1",
         canonicalURL:
-            "https://art-by-encore.vercel.app/",
+            "https://www.artbyencore.com/portfolio",
         openGraph: {
             title: "Art By Encore",
             description:
                 "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-            url: "https://art-by-encore.vercel.app/",
+            url: "https://www.artbyencore.com/portfolio",
             type: "website",
             image: "/assets/icons/logo.svg",
         },
@@ -2123,12 +2123,12 @@ export const seo = {
         metaRobots: "index, follow",
         metaViewport: "width=device-width, initial-scale=1",
         canonicalURL:
-            "https://art-by-encore.vercel.app/",
+            "https://www.artbyencore.com/contact-us",
         openGraph: {
             title: "Art By Encore",
             description:
                 "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-            url: "https://art-by-encore.vercel.app/",
+            url: "https://www.artbyencore.com/contact-us",
             type: "website",
             image: "/assets/icons/logo.svg",
         },
@@ -2142,12 +2142,12 @@ export const seo = {
         metaRobots: "index, follow",
         metaViewport: "width=device-width, initial-scale=1",
         canonicalURL:
-            "https://art-by-encore.vercel.app/",
+            "https://www.artbyencore.com/testimonials",
         openGraph: {
             title: "Art By Encore",
             description:
                 "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-            url: "https://art-by-encore.vercel.app/",
+            url: "https://www.artbyencore.com/testimonials",
             type: "website",
             image: "/assets/icons/logo.svg",
         },
@@ -2172,12 +2172,12 @@ export const blogs = {
                     "creative design agency, branding and design agency, graphic design services, art by encore, design agency for clients",
                 metaRobots: "index, follow",
                 metaViewport: "width=device-width, initial-scale=1",
-                canonicalURL: "https://art-by-encore.vercel.app/",
+                canonicalURL: "https://www.artbyencore.com/blogs",
                 openGraph: {
                     title: "Art By Encore",
                     description:
                         "At our design agency, we know how important it is to get the perfect shot – for you and your clients.",
-                    url: "https://art-by-encore.vercel.app/",
+                    url: "https://www.artbyencore.com/blogs",
                     type: "website",
                     image: "/assets/icons/logo.svg",
                 },
