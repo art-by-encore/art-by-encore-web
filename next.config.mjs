@@ -9,6 +9,7 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
+          // Content Security Policy
           {
             key: 'Content-Security-Policy',
             value: `
@@ -26,10 +27,37 @@ const nextConfig = {
                 https://analytics.google.com;
             `.replace(/\s{2,}/g, ' ').trim(),
           },
+          // Prevent clickjacking
           {
             key: 'X-Frame-Options',
             value: 'SAMEORIGIN',
           },
+          // Prevent MIME type sniffing
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          // Control referrer information
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          // Control browser features
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+          },
+          // Enable HSTS (HTTP Strict Transport Security)
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+          // Prevent Internet Explorer from executing unwanted downloads
+          {
+            key: 'X-Download-Options',
+            value: 'noopen',
+          },
+         
         ],
       },
     ];
