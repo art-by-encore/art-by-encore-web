@@ -1,6 +1,5 @@
 'use client'
 import React from 'react'
-import { portfolioTabs } from '@/utils/data';
 import { Container, SmokeyCursor } from '../ui';
 import './portfolio-tabs.css';
 import { portfolioCards } from "@/utils/data";
@@ -10,7 +9,7 @@ import Image from 'next/image';
 const PortfolioCards = (props) => {
     const { data } = props;
     const { list } = portfolioCards;
-    // console.log('data', data);
+    
     return (
         <div className='text-white lg:py-[100px] md:py-[60px] py-[40px] relative '>
             <Container>
@@ -18,11 +17,14 @@ const PortfolioCards = (props) => {
                     <div className='grid lg:flex lg:justify-center lg:flex-wrap md:grid-cols-2 grid-cols-1 lg:gap-[36px] lg:gap-x-[24px] md:gap-[24px] gap-[30px] '>
                         {
                             data?.map((item, index) => {
-                                const {content} = item;
-                                const {card} = content;
-                                const slug = card?.pageUrl ? `portfolio/${card?.pageUrl}` : '#'
+                                const { content } = item;
+                                const { card } = content;
+                                const slug = card?.pageUrl ? `portfolio/${card?.pageUrl}` : '#';
+                                const finalURL = card?.isExternalURL ? card?.pageUrl : slug;
+                                const target = card?.isExternalURL ? '_blank' : '_self';
+                                
                                 return <>
-                                    <Link key={index} href={slug} className='w-full lg:block hidden basis-[22.5rem] h-[350px] backdrop-blur-[40px] border-border-nav border-[1px] border-solid morph-bg-border  md:rounded-[16px] rounded-[10px] relative overflow-hidden'>
+                                    <Link key={index} href={finalURL} target={target} className='w-full lg:block hidden basis-[22.5rem] h-[350px] backdrop-blur-[40px] border-border-nav border-[1px] border-solid morph-bg-border  md:rounded-[16px] rounded-[10px] relative overflow-hidden'>
                                         <div className='absolute w-full h-full flex flex-col justify-between inset-0 px-[24px] py-[36px] z-20'>
                                             <div className='flex flex-col gap-[8px]'>
                                                 <h4 className=''>Category</h4>
@@ -53,9 +55,9 @@ const PortfolioCards = (props) => {
                                                 <h4 className=''>Category</h4>
                                                 <h3 className='font-card-title'>{card?.cardTitle}</h3>
                                             </div>
-                                            <Link href={slug} className='capitalize font-btn-text px-[14px] py-[12px] rounded-[50px] text-white bg-orange w-fit flex gap-[4px] justify-center items-center group' >
+                                            <Link href={finalURL} target={target} className='capitalize font-btn-text px-[14px] py-[12px] rounded-[50px] text-white bg-orange w-fit flex gap-[4px] justify-center items-center group' >
                                                 <span className="translate-x-[10px] group-hover:translate-x-[0px] transition-all duration-500 ease-in-out">
-                                                     {card?.ctaText}
+                                                    {card?.ctaText}
                                                 </span>
                                                 <span className="-translate-x-[10px] opacity-0 group-hover:translate-x-[0px] group-hover:opacity-100 transition-all duration-500 ease-in-out">
                                                     <svg width="16" height="14" viewBox="0 0 14 15" fill="none" className="rtl:rotate-180">

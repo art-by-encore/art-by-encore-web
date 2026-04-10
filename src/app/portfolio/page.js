@@ -41,7 +41,7 @@ async function getPortfolioData() {
         const { data, error } = await supabase
             .from('portfolio')
             .select('*')
-            .order('created_at', { ascending: false });
+            .order('created_at', { ascending: true });
 
         if (error) {
             console.error('Error fetching portfolio:', error);
