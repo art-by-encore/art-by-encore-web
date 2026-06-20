@@ -1,5 +1,6 @@
 
 import { NewLoader, InnerPagesBanner } from "@/components/ui";
+import ClientTestimonialsVideos from "@/components/testimonials/ClientTestimonialsVideos";
 import Testimonials from "@/components/testimonials/Testimonials";
 import { seo } from '@/utils/data';
 const { testimonialsSEO } = seo;
@@ -26,6 +27,7 @@ export default function Page() {
             {/* <Loader /> */}
             <NewLoader />
             <InnerPagesBanner data={banner} />
+            <ClientTestimonialsVideos />
             <Testimonials />
         </main>
     );
