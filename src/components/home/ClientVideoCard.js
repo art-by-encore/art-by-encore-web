@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { testimonialVideos } from "@/utils/testimonialVideos";
+import { playVideoWithSound, warmVideo } from "@/utils/videoPlayback";
 
 const testimonials = testimonialVideos;
 
@@ -23,16 +24,20 @@ const ClientVideoCard = ({ className = "" }) => {
         if (videoRef.current) {
             videoRef.current.pause();
             videoRef.current.currentTime = 0;
+            warmVideo(videoRef.current);
         }
     }, [videoSrc]);
 
-    const handlePlayVideo = () => {
+    const handlePlayVideo = async () => {
         const video = videoRef.current;
         if (!video) return;
 
-        video.muted = false;
-        video.play();
-        setIsPlaying(true);
+        try {
+            await playVideoWithSound(video);
+            setIsPlaying(true);
+        } catch {
+            setIsPlaying(false);
+        }
     };
 
     const handlePauseVideo = () => {
@@ -82,7 +87,11 @@ const ClientVideoCard = ({ className = "" }) => {
                     </Link>
                 </div>
 
-                <div className="relative w-full h-[160px] sm:h-[180px] md:h-[200px] lg:h-[220px] rounded-[10px] sm:rounded-[12px] overflow-hidden group">
+                <div
+                    className="relative w-full h-[160px] sm:h-[180px] md:h-[200px] lg:h-[220px] rounded-[10px] sm:rounded-[12px] overflow-hidden group"
+                    onMouseEnter={() => warmVideo(videoRef.current)}
+                    onTouchStart={() => warmVideo(videoRef.current)}
+                >
                     <video
                         ref={videoRef}
                         key={videoSrc}
@@ -90,7 +99,7 @@ const ClientVideoCard = ({ className = "" }) => {
                         poster={posterSrc}
                         className="w-full h-full object-cover"
                         playsInline
-                        preload="none"
+                        preload="metadata"
                         controls={false}
                         controlsList="nodownload nofullscreen noremoteplayback"
                         disablePictureInPicture
