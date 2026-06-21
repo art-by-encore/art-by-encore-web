@@ -7,6 +7,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { testimonialVideos } from "@/utils/testimonialVideos";
+import { playVideoWithSound, warmVideo } from "@/utils/videoPlayback";
 
 const TestimonialVideoItem = ({
     item,
@@ -24,10 +25,24 @@ const TestimonialVideoItem = ({
     }, [isPlaying]);
 
     useEffect(() => {
-        if (isPlaying && videoRef.current) {
-            videoRef.current.muted = false;
-            videoRef.current.play();
-        }
+        const video = videoRef.current;
+        if (!video) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) warmVideo(video);
+            },
+            { rootMargin: "200px" }
+        );
+
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, [item.videoSrc]);
+
+    useEffect(() => {
+        if (!isPlaying || !videoRef.current) return;
+
+        playVideoWithSound(videoRef.current).catch(() => onPause());
     }, [isPlaying]);
 
     const handlePlay = () => onPlay(item.id);
@@ -41,14 +56,18 @@ const TestimonialVideoItem = ({
 
     return (
         <div className="flex flex-col gap-[16px]">
-            <div className="relative w-full h-[240px] md:h-[260px] lg:h-[300px] rounded-[12px] overflow-hidden group">
+            <div
+                className="relative w-full h-[240px] md:h-[260px] lg:h-[300px] rounded-[12px] overflow-hidden group"
+                onMouseEnter={() => warmVideo(videoRef.current)}
+                onTouchStart={() => warmVideo(videoRef.current)}
+            >
                 <video
                     ref={videoRef}
                     src={item.videoSrc}
                     poster={item.posterSrc}
                     className="w-full h-full object-cover"
                     playsInline
-                    preload="none"
+                    preload="metadata"
                     controls={false}
                     onEnded={() => onEnded(item.id)}
                     onPause={() => {
