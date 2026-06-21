@@ -2,6 +2,7 @@ export const testimonialVideos = [
     {
         id: 1,
         videoSrc: "/assets/videos/testimonial-1.mp4",
+        posterSrc: "/assets/videos/testimonial-1-poster.jpg",
         clientName: "Alex R.",
         position: "Marketing Director",
         description:
@@ -10,6 +11,7 @@ export const testimonialVideos = [
     {
         id: 2,
         videoSrc: "/assets/videos/testimonial-2.mp4",
+        posterSrc: "/assets/videos/testimonial-2-poster.jpg",
         clientName: "Lisa M.",
         position: "Brand Manager",
         description:
@@ -18,6 +20,7 @@ export const testimonialVideos = [
     {
         id: 3,
         videoSrc: "/assets/videos/testimonial-3.mp4",
+        posterSrc: "/assets/videos/testimonial-3-poster.jpg",
         clientName: "James T.",
         position: "Founder",
         description:
@@ -26,6 +29,7 @@ export const testimonialVideos = [
     {
         id: 4,
         videoSrc: "/assets/videos/testimonial-4.mp4",
+        posterSrc: "/assets/videos/testimonial-4-poster.jpg",
         clientName: "Priya S.",
         position: "Creative Head",
         description:

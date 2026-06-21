@@ -16,7 +16,7 @@ const ClientVideoCard = ({ className = "" }) => {
         setActiveTestimonial(testimonials[randomIndex]);
     }, []);
 
-    const { videoSrc, clientName, position, description } = activeTestimonial;
+    const { videoSrc, posterSrc, clientName, position, description } = activeTestimonial;
 
     useEffect(() => {
         setIsPlaying(false);
@@ -87,9 +87,10 @@ const ClientVideoCard = ({ className = "" }) => {
                         ref={videoRef}
                         key={videoSrc}
                         src={videoSrc}
+                        poster={posterSrc}
                         className="w-full h-full object-cover"
                         playsInline
-                        preload="metadata"
+                        preload="none"
                         controls={false}
                         controlsList="nodownload nofullscreen noremoteplayback"
                         disablePictureInPicture

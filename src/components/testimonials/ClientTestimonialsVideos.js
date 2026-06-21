@@ -45,9 +45,10 @@ const TestimonialVideoItem = ({
                 <video
                     ref={videoRef}
                     src={item.videoSrc}
+                    poster={item.posterSrc}
                     className="w-full h-full object-cover"
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     controls={false}
                     onEnded={() => onEnded(item.id)}
                     onPause={() => {
