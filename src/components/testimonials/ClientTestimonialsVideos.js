@@ -114,6 +114,12 @@ const ClientTestimonialsVideos = () => {
     const nextRef = useRef(null);
     const [swiper, setSwiper] = useState(null);
     const [playingId, setPlayingId] = useState(null);
+    const [showNavigation, setShowNavigation] = useState(false);
+
+    const updateNavigationVisibility = (swiperInstance) => {
+        if (!swiperInstance) return;
+        setShowNavigation(!swiperInstance.isLocked);
+    };
 
     useEffect(() => {
         if (!swiper || !prevRef.current || !nextRef.current) return;
@@ -122,7 +128,8 @@ const ClientTestimonialsVideos = () => {
         swiper.params.navigation.nextEl = nextRef.current;
         swiper.navigation.init();
         swiper.navigation.update();
-    }, [swiper]);
+        updateNavigationVisibility(swiper);
+    }, [swiper, showNavigation]);
 
     const handlePlay = (id) => setPlayingId(id);
     const handlePause = () => setPlayingId(null);
@@ -135,53 +142,63 @@ const ClientTestimonialsVideos = () => {
                     <h2 className="font-title-60 text-white">What our clients say</h2>
 
                     <div className="relative">
-                        <button
-                            ref={prevRef}
-                            type="button"
-                            aria-label="Previous testimonial"
-                            className="absolute left-0 top-[120px] md:top-[130px] lg:top-[150px] -translate-y-1/2 z-10 w-[40px] h-[40px] rounded-full border border-white/30 bg-black/55 backdrop-blur-[2px] flex items-center justify-center text-white"
-                        >
-                            <svg
-                                className="w-[10px] h-[16px]"
-                                viewBox="0 0 10 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M8 2L2 8L8 14"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </button>
+                        {showNavigation && (
+                            <>
+                                <button
+                                    ref={prevRef}
+                                    type="button"
+                                    aria-label="Previous testimonial"
+                                    className="absolute left-0 top-[120px] md:top-[130px] lg:top-[150px] -translate-y-1/2 z-10 w-[40px] h-[40px] rounded-full border border-white/30 bg-black/55 backdrop-blur-[2px] flex items-center justify-center text-white"
+                                >
+                                    <svg
+                                        className="w-[10px] h-[16px]"
+                                        viewBox="0 0 10 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8 2L2 8L8 14"
+                                            stroke="white"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </button>
 
-                        <button
-                            ref={nextRef}
-                            type="button"
-                            aria-label="Next testimonial"
-                            className="absolute right-0 top-[120px] md:top-[130px] lg:top-[150px] -translate-y-1/2 z-10 w-[40px] h-[40px] rounded-full border border-white/30 bg-black/55 backdrop-blur-[2px] flex items-center justify-center text-white"
-                        >
-                            <svg
-                                className="w-[10px] h-[16px]"
-                                viewBox="0 0 10 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M2 2L8 8L2 14"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </button>
+                                <button
+                                    ref={nextRef}
+                                    type="button"
+                                    aria-label="Next testimonial"
+                                    className="absolute right-0 top-[120px] md:top-[130px] lg:top-[150px] -translate-y-1/2 z-10 w-[40px] h-[40px] rounded-full border border-white/30 bg-black/55 backdrop-blur-[2px] flex items-center justify-center text-white"
+                                >
+                                    <svg
+                                        className="w-[10px] h-[16px]"
+                                        viewBox="0 0 10 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M2 2L8 8L2 14"
+                                            stroke="white"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
 
                         <Swiper
                             modules={[Navigation]}
-                            onSwiper={setSwiper}
+                            watchOverflow
+                            onSwiper={(instance) => {
+                                setSwiper(instance);
+                                updateNavigationVisibility(instance);
+                            }}
+                            onResize={updateNavigationVisibility}
+                            onBreakpoint={updateNavigationVisibility}
                             spaceBetween={24}
                             slidesPerView={1.15}
                             breakpoints={{
