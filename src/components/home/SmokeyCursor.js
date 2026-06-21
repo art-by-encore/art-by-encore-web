@@ -2,12 +2,13 @@
 
 import React, { useEffect, useRef } from 'react';
 
-const SmokeyCursor = () => {
+const SmokeyCursor = ({ className = '', targetRef = null }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const glRef = useRef(null);
   const configRef = useRef(null);
   const pointersRef = useRef([]);
+  const cleanupRef = useRef(null);
 
   // Convert hex color #E14807 to RGB
   const HEX_COLOR = "#E14807";
@@ -626,8 +627,8 @@ const SmokeyCursor = () => {
       };
 
       let dye, velocity, divergence, curl, pressure;
-
-      const initFramebuffers = () => {
+      let initFramebuffers;
+      initFramebuffers = () => {
         const simRes = getResolution(config.SIM_RESOLUTION);
         const dyeRes = getResolution(config.DYE_RESOLUTION);
 
@@ -811,57 +812,78 @@ const SmokeyCursor = () => {
         splat(x, y, dx, dy, CONSTANT_COLOR);
       }
 
-      // Event handlers
+      // Event handlers — track on banner section so content above canvas still triggers effect
+      const getEventTarget = () => targetRef?.current || canvas.parentElement || canvas;
+
+      const getPointerPosition = (clientX, clientY) => {
+        const rect = getEventTarget().getBoundingClientRect();
+        if (!rect.width || !rect.height) return null;
+
+        const x = ((clientX - rect.left) / rect.width) * canvas.width;
+        const y = ((clientY - rect.top) / rect.height) * canvas.height;
+        return { x, y };
+      };
+
       const handleMouseMove = (e) => {
-        const rect = canvas.getBoundingClientRect();
+        const position = getPointerPosition(e.clientX, e.clientY);
+        if (!position) return;
+
         const pointer = pointers[0];
-        const posX = scaleByPixelRatio(e.clientX - rect.left);
-        const posY = scaleByPixelRatio(e.clientY - rect.top);
-        updatePointerMoveData(pointer, posX, posY, CONSTANT_COLOR);
+        updatePointerMoveData(pointer, position.x, position.y, CONSTANT_COLOR);
       };
 
       const handleTouchMove = (e) => {
-        e.preventDefault();
-        const rect = canvas.getBoundingClientRect();
+        if (!e.touches[0]) return;
+
+        const position = getPointerPosition(e.touches[0].clientX, e.touches[0].clientY);
+        if (!position) return;
+
         const pointer = pointers[0];
-        const touch = e.touches[0];
-        const posX = scaleByPixelRatio(touch.clientX - rect.left);
-        const posY = scaleByPixelRatio(touch.clientY - rect.top);
-        updatePointerMoveData(pointer, posX, posY, CONSTANT_COLOR);
+        updatePointerMoveData(pointer, position.x, position.y, CONSTANT_COLOR);
       };
 
-      // Add event listeners
-      canvas.addEventListener('mousemove', handleMouseMove);
-      canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+      const eventTarget = getEventTarget();
+      eventTarget.addEventListener('mousemove', handleMouseMove);
+      eventTarget.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+      const resizeObserver = new ResizeObserver(() => {
+        if (resizeCanvas()) {
+          initFramebuffers();
+        }
+      });
+      resizeObserver.observe(getEventTarget());
 
       // Start animation
       update();
 
       // Cleanup function
-      return () => {
+      cleanupRef.current = () => {
         if (animationRef.current) {
           cancelAnimationFrame(animationRef.current);
         }
-        canvas.removeEventListener('mousemove', handleMouseMove);
-        canvas.removeEventListener('touchmove', handleTouchMove);
+        eventTarget.removeEventListener('mousemove', handleMouseMove);
+        eventTarget.removeEventListener('touchmove', handleTouchMove);
+        resizeObserver.disconnect();
       };
+
+      return cleanupRef.current;
     };
 
-    // Initialize immediately instead of waiting for load
-    initFluid();
+    const cleanup = initFluid();
 
-    // Cleanup
     return () => {
+      if (cleanup) cleanup();
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, []);
+  }, [targetRef]);
 
   return (
     <canvas
       ref={canvasRef}
       id="fluid"
+      className={className}
       style={{
         position: 'absolute',
         top: 0,
@@ -869,7 +891,7 @@ const SmokeyCursor = () => {
         width: '100%',
         height: '100%',
         zIndex: 1,
-        pointerEvents: 'auto',
+        pointerEvents: 'none',
         opacity: 0.6,
       }}
     />

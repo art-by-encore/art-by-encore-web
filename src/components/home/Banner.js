@@ -1,14 +1,15 @@
 "use client"
-import React from 'react'
+import React, { useRef } from 'react'
 import { Container, FallTextReveal } from '../ui'
 import SmokeyCursor from "./SmokeyCursor"
 import ClientVideoCard from "./ClientVideoCard"
 import { useLoaderContext } from '@/app/hooks/LoaderContext'
 const Banner = () => {
     const { isLoader } = useLoaderContext();
+    const sectionRef = useRef(null);
     // console.log('loader', isLoader)
     return (
-        <section className='w-full relative overflow-hidden lg:min-h-[790px]'>
+        <section ref={sectionRef} className='w-full relative overflow-hidden lg:min-h-[790px]'>
             {/* Video Background */}
             <div className='absolute inset-0 min-h-full w-full'>
                 <video
@@ -27,9 +28,9 @@ const Banner = () => {
                 />
             </div>
 
-            {/* Smokey Cursor Effect */}
-            <div className='w-full h-full lg:block hidden absolute inset-0 z-10'>
-                <SmokeyCursor />
+            {/* Smokey Cursor Effect — covers full banner, tracks mouse on entire section */}
+            <div className='absolute inset-0 z-[15] pointer-events-none'>
+                <SmokeyCursor targetRef={sectionRef} />
             </div>
 
 
@@ -80,7 +81,7 @@ const Banner = () => {
 
                     {
                         !isLoader && (
-                            <ClientVideoCard className="w-full sm:max-w-[400px] lg:max-w-[420px] mx-auto lg:mx-0 shrink-0" />
+                            <ClientVideoCard className="w-full sm:max-w-[440px] lg:max-w-[480px] mx-auto lg:mx-0 shrink-0" />
                         )
                     }
                 </div>
