@@ -1,18 +1,20 @@
 "use client"
-import React from 'react'
-import { Container, Button, TextAppear, FallTextReveal } from '../ui'
+import React, { useRef } from 'react'
+import { Container, FallTextReveal } from '../ui'
 import SmokeyCursor from "./SmokeyCursor"
+import ClientVideoCard from "./ClientVideoCard"
 import { useLoaderContext } from '@/app/hooks/LoaderContext'
 const Banner = () => {
     const { isLoader } = useLoaderContext();
+    const sectionRef = useRef(null);
     // console.log('loader', isLoader)
     return (
-        <section className='w-full relative lg:h-[790px] md:h-[600px] h-[500px] overflow-hidden'>
+        <section ref={sectionRef} className='w-full relative overflow-hidden lg:min-h-[790px]'>
             {/* Video Background */}
-            <div className='absolute inset-0 w-full h-full'>
+            <div className='absolute inset-0 min-h-full w-full'>
                 <video
                     src="/assets/videos/hero-video.mp4"
-                    className="h-full w-full object-cover"
+                    className="min-h-full h-full w-full object-cover"
                     poster='/assets/videos/banner-poster.png'
                     autoPlay
                     playsInline
@@ -26,16 +28,16 @@ const Banner = () => {
                 />
             </div>
 
-            {/* Smokey Cursor Effect */}
-            <div className='w-full h-full lg:block hidden absolute inset-0 z-10'>
-                <SmokeyCursor />
+            {/* Smokey Cursor Effect — covers full banner, tracks mouse on entire section */}
+            <div className='absolute inset-0 z-[15] pointer-events-none'>
+                <SmokeyCursor targetRef={sectionRef} />
             </div>
 
 
             {/* Content */}
-            <Container className='flex flex-col justify-center h-full '>
-                {/* <SmokeyCursor /> */}
-                <div className='max-w-[664px] pr-[25px] w-full flex flex-col lg:gap-[30px] md:gap-[24px] gap-[16px] absolute   my-auto'>
+            <Container className='relative z-20 flex w-full items-center pt-[100px] pb-[40px] sm:pt-[110px] md:pt-[120px] md:pb-[50px] lg:min-h-[790px] lg:pt-[140px] lg:pb-[30px]'>
+                <div className='flex w-full flex-col lg:flex-row lg:items-center lg:justify-between gap-[24px] md:gap-[30px] lg:gap-[40px]'>
+                    <div className='w-full lg:max-w-[664px] lg:pr-[25px] flex flex-col gap-[16px] md:gap-[24px] lg:gap-[30px] flex-1'>
                     <div className='flex flex-col'>
 
                         {
@@ -75,6 +77,13 @@ const Banner = () => {
                     } */}
 
 
+                    </div>
+
+                    {
+                        !isLoader && (
+                            <ClientVideoCard className="w-full sm:max-w-[440px] lg:max-w-[480px] mx-auto lg:mx-0 shrink-0" />
+                        )
+                    }
                 </div>
             </Container>
         </section >
