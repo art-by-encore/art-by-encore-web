@@ -17,7 +17,7 @@ const ClientVideoCard = ({ className = "" }) => {
         setActiveTestimonial(testimonials[randomIndex]);
     }, []);
 
-    const { videoSrc, posterSrc, clientName, position, description } = activeTestimonial;
+    const { videoSrc, posterSrc } = activeTestimonial;
 
     useEffect(() => {
         setIsPlaying(false);
@@ -88,7 +88,7 @@ const ClientVideoCard = ({ className = "" }) => {
                 </div>
 
                 <div
-                    className="relative w-full h-[160px] sm:h-[180px] md:h-[200px] lg:h-[220px] rounded-[10px] sm:rounded-[12px] overflow-hidden group"
+                    className="relative w-full h-[180px] sm:h-[200px] md:h-[230px] lg:h-[260px] rounded-[10px] sm:rounded-[12px] overflow-hidden group"
                     onMouseEnter={() => warmVideo(videoRef.current)}
                     onTouchStart={() => warmVideo(videoRef.current)}
                 >
@@ -153,12 +153,6 @@ const ClientVideoCard = ({ className = "" }) => {
                             </span>
                         </button>
                     )}
-                </div>
-
-                <div className="flex flex-col gap-[8px] md:gap-[12px]">
-                    <h4 className="font-card-title text-white text-[20px] md:text-[24px] lg:text-[30px] leading-tight">{clientName}</h4>
-                    <p className="font-card-text text-white text-[16px] md:text-[18px]">{position}</p>
-                    <p className="font-card-text text-white text-[16px] md:text-[18px] line-clamp-2">{description}</p>
                 </div>
             </div>
 

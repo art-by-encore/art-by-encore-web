@@ -80,7 +80,7 @@ const TestimonialVideoItem = ({
                         type="button"
                         onClick={handlePlay}
                         className="absolute inset-0 z-10 flex items-center justify-center"
-                        aria-label={`Play ${item.clientName} testimonial`}
+                        aria-label="Play testimonial video"
                     >
                         <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center">
                             <svg
@@ -104,7 +104,7 @@ const TestimonialVideoItem = ({
                         type="button"
                         onClick={handlePause}
                         className="absolute inset-0 z-10 flex items-center justify-center"
-                        aria-label={`Pause ${item.clientName} testimonial`}
+                        aria-label="Pause testimonial video"
                     >
                         <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                             <svg
@@ -119,11 +119,6 @@ const TestimonialVideoItem = ({
                         </span>
                     </button>
                 )}
-            </div>
-
-            <div className="flex flex-col gap-[4px]">
-                <h4 className="font-card-title text-white">{item.clientName}</h4>
-                <p className="font-card-text text-white">{item.position}</p>
             </div>
         </div>
     );
