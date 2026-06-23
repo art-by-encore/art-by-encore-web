@@ -37,7 +37,7 @@ const FloatingButton = () => {
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
   return (
-    <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50">
+    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50">
       <div
         ref={containerRef}
         className="relative"
@@ -121,7 +121,7 @@ const FloatingButton = () => {
           whileTap={{ scale: 0.97 }}
           aria-expanded={isOpen}
           aria-label="Pay Now"
-          className="payment-float-btn relative overflow-hidden flex items-center gap-[12px] pl-[16px] pr-[20px] py-[14px] min-h-[60px] rounded-[50px] bg-orange border-white border-[1px] text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
+          className="payment-float-btn relative overflow-hidden flex items-center gap-[8px] sm:gap-[12px] pl-[12px] pr-[14px] py-[10px] sm:pl-[16px] sm:pr-[20px] sm:py-[14px] min-h-[48px] sm:min-h-[60px] rounded-[50px] bg-orange border-white border-[1px] text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
         >
           <div className="payment-animate-border pointer-events-none">
             <span></span>
@@ -130,21 +130,21 @@ const FloatingButton = () => {
             <span></span>
           </div>
 
-          <div className="relative z-10 flex items-center gap-[12px]">
-            <div className="w-[32px] h-[32px] relative flex-shrink-0">
+          <div className="relative z-10 flex items-center gap-[8px] sm:gap-[12px]">
+            <div className="w-[24px] h-[24px] sm:w-[32px] sm:h-[32px] relative flex-shrink-0">
               <Image
                 src="/assets/icons/payment-w.svg"
                 alt="Payment"
                 width={32}
                 height={32}
-                className="object-contain"
+                className="object-contain w-full h-full"
               />
             </div>
-            <span className="font-btn-text whitespace-nowrap">Pay Now</span>
+            <span className="font-btn-text whitespace-nowrap text-[14px] leading-[20px] sm:text-[18px] sm:leading-[32px]">Pay Now</span>
             <motion.svg
               animate={{ rotate: isOpen ? 180 : 0 }}
               transition={{ duration: 0.25 }}
-              className="w-[14px] h-[14px] flex-shrink-0"
+              className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] flex-shrink-0"
               viewBox="0 0 14 14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
