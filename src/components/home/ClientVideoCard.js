@@ -17,7 +17,7 @@ const ClientVideoCard = ({ className = "" }) => {
         setActiveTestimonial(testimonials[randomIndex]);
     }, []);
 
-    const { videoSrc, posterSrc } = activeTestimonial;
+    const { videoSrc, posterSrc, clientName } = activeTestimonial;
 
     useEffect(() => {
         setIsPlaying(false);
@@ -154,6 +154,8 @@ const ClientVideoCard = ({ className = "" }) => {
                         </button>
                     )}
                 </div>
+
+                <h4 className="font-card-title text-white text-[18px] md:text-[22px] lg:text-[26px] leading-tight">{clientName}</h4>
             </div>
 
             <style jsx global>{`
