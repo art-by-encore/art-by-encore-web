@@ -1,4 +1,6 @@
 export const testimonialVideos = [
+
+    
     {
         id: 1,
         videoSrc: "/assets/videos/testimonial-1-optimized.mp4",
@@ -22,5 +24,11 @@ export const testimonialVideos = [
         videoSrc: "/assets/videos/testimonial-4-optimized.mp4",
         posterSrc: "/assets/videos/testimonial-4-poster.jpg",
         clientName: "Thomas",
+    },
+    {
+        id: 5,
+        videoSrc: "/assets/videos/testimonial-5-optimized.mp4",
+        posterSrc: "/assets/videos/testimonial-5-poster.jpg",
+        clientName: "Chris",
     },
 ];
