@@ -23,4 +23,10 @@ export const testimonialVideos = [
         posterSrc: "/assets/videos/testimonial-4-poster.jpg",
         clientName: "Thomas",
     },
+    {
+        id: 5,
+        videoSrc: "/assets/videos/testimonial-5-optimized.mp4",
+        posterSrc: "/assets/videos/testimonial-5-poster.jpg",
+        clientName: "Chris",
+    },
 ];
