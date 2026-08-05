@@ -2,15 +2,30 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import LightGallery from "lightgallery/react";
 import { testimonialVideos } from "@/utils/testimonialVideos";
-import { playVideoWithSound, warmVideo } from "@/utils/videoPlayback";
+
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/css/lg-autoplay.css";
+import "lightgallery/css/lg-fullscreen.css";
+import "lightgallery/css/lg-share.css";
+import "lightgallery/css/lg-rotate.css";
+import "lightgallery/css/lg-video.css";
+
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgAutoplay from "lightgallery/plugins/autoplay";
+import lgFullscreen from "lightgallery/plugins/fullscreen";
+import lgRotate from "lightgallery/plugins/rotate";
+import lgVideo from "lightgallery/plugins/video";
 
 const testimonials = testimonialVideos;
 
 const ClientVideoCard = ({ className = "" }) => {
-    const videoRef = useRef(null);
+    const lightGalleryRef = useRef(null);
     const [activeTestimonial, setActiveTestimonial] = useState(testimonials[0]);
-    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * testimonials.length);
@@ -19,37 +34,11 @@ const ClientVideoCard = ({ className = "" }) => {
 
     const { videoSrc, posterSrc, clientName } = activeTestimonial;
 
-    useEffect(() => {
-        setIsPlaying(false);
-        if (videoRef.current) {
-            videoRef.current.pause();
-            videoRef.current.currentTime = 0;
-            warmVideo(videoRef.current);
-        }
-    }, [videoSrc]);
-
-    const handlePlayVideo = async () => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        try {
-            await playVideoWithSound(video);
-            setIsPlaying(true);
-        } catch {
-            setIsPlaying(false);
+    const onInit = (detail) => {
+        if (detail) {
+            lightGalleryRef.current = detail.instance;
         }
     };
-
-    const handlePauseVideo = () => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        video.pause();
-        setIsPlaying(false);
-    };
-
-    const handleVideoPause = () => setIsPlaying(false);
-    const handleVideoEnded = () => setIsPlaying(false);
 
     return (
         <div
@@ -87,73 +76,63 @@ const ClientVideoCard = ({ className = "" }) => {
                     </Link>
                 </div>
 
-                <div
-                    className="relative w-full h-[180px] sm:h-[200px] md:h-[230px] lg:h-[260px] rounded-[10px] sm:rounded-[12px] overflow-hidden group"
-                    onMouseEnter={() => warmVideo(videoRef.current)}
-                    onTouchStart={() => warmVideo(videoRef.current)}
+                <LightGallery
+                    key={videoSrc}
+                    onInit={onInit}
+                    speed={500}
+                    selector=".banner-testimonial-video-item"
+                    mode="lg-fade"
+                    download={false}
+                    autoplayFirstVideo={false}
+                    thumbnail={false}
+                    plugins={[
+                        lgThumbnail,
+                        lgZoom,
+                        lgAutoplay,
+                        lgFullscreen,
+                        lgRotate,
+                        lgVideo,
+                    ]}
                 >
-                    <video
-                        ref={videoRef}
-                        key={videoSrc}
-                        src={videoSrc}
-                        poster={posterSrc}
-                        className="w-full h-full object-cover"
-                        playsInline
-                        preload="metadata"
-                        controls={false}
-                        controlsList="nodownload nofullscreen noremoteplayback"
-                        disablePictureInPicture
-                        disableRemotePlayback
-                        onPause={handleVideoPause}
-                        onEnded={handleVideoEnded}
-                        onPlay={() => setIsPlaying(true)}
-                    />
+                    <a
+                        className="banner-testimonial-video-item relative block cursor-pointer group w-full h-[180px] sm:h-[200px] md:h-[230px] lg:h-[260px] rounded-[10px] sm:rounded-[12px] overflow-hidden"
+                        data-lg-size="1280-720"
+                        data-thumb={posterSrc}
+                        data-video={`{
+    "source": [
+      {
+        "src": "${videoSrc}",
+        "type": "video/mp4"
+      }
+    ],
+    "attributes": {
+      "controls": true,
+      "preload": "metadata",
+      "controlsList": "nodownload noplaybackrate",
+      "playsinline": true,
+      "poster": "${posterSrc}"
+    }
+  }`}
+                    >
+                        <img
+                            src={posterSrc}
+                            alt={`${clientName} testimonial`}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
 
-                    {!isPlaying && (
-                        <button
-                            type="button"
-                            onClick={handlePlayVideo}
-                            className="absolute inset-0 z-10 flex items-center justify-center"
-                            aria-label="Play video"
-                        >
-                            <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition">
+                            <div className="w-[52px] h-[52px] sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
                                 <svg
-                                    className="w-[18px] h-[18px] ml-[3px]"
-                                    viewBox="0 0 18 20"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-[18px] h-[18px] sm:w-8 sm:h-8 text-black ml-1"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
                                 >
-                                    <path
-                                        d="M3 2.5L15.5 10L3 17.5V2.5Z"
-                                        fill="white"
-                                        strokeLinejoin="round"
-                                    />
+                                    <path d="M8 5v14l11-7z" />
                                 </svg>
-                            </span>
-                        </button>
-                    )}
-
-                    {isPlaying && (
-                        <button
-                            type="button"
-                            onClick={handlePauseVideo}
-                            className="absolute inset-0 z-10 flex items-center justify-center"
-                            aria-label="Pause video"
-                        >
-                            <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <svg
-                                    className="w-[16px] h-[16px]"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect x="2" y="1" width="4" height="14" rx="1" fill="white" />
-                                    <rect x="10" y="1" width="4" height="14" rx="1" fill="white" />
-                                </svg>
-                            </span>
-                        </button>
-                    )}
-                </div>
+                            </div>
+                        </div>
+                    </a>
+                </LightGallery>
 
                 <h4 className="font-card-title text-white text-[18px] md:text-[22px] lg:text-[26px] leading-tight">{clientName}</h4>
             </div>

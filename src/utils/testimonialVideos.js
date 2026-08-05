@@ -1,46 +1,58 @@
 export const testimonialVideos = [
-
-    
     {
         id: 1,
-        videoSrc: "/assets/videos/testimonial-1-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-1-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916047/testimonial-1-optimized_ddfirr.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916047/testimonial-1-optimized_ddfirr.jpg",
         clientName: "Ethan",
     },
     {
         id: 2,
-        videoSrc: "/assets/videos/testimonial-2-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-2-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916056/testimonial-2-optimized_sql1w9.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916056/testimonial-2-optimized_sql1w9.jpg",
         clientName: "Mike",
     },
     {
         id: 3,
-        videoSrc: "/assets/videos/testimonial-3-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-3-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916044/testimonial-3-optimized_o1zkd9.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916044/testimonial-3-optimized_o1zkd9.jpg",
         clientName: "Pharaoh",
     },
     {
         id: 4,
-        videoSrc: "/assets/videos/testimonial-4-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-4-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916044/testimonial-4-optimized_unjrns.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916044/testimonial-4-optimized_unjrns.jpg",
         clientName: "Thomas",
     },
     {
         id: 5,
-        videoSrc: "/assets/videos/testimonial-5-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-5-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916047/testimonial-5-optimized_yh4ifh.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916047/testimonial-5-optimized_yh4ifh.jpg",
         clientName: "Chris",
     },
     {
         id: 6,
-        videoSrc: "/assets/videos/testimonial-6-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-6-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916053/testimonial-6-optimized_ezq29n.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916053/testimonial-6-optimized_ezq29n.jpg",
         clientName: "Tatvod",
     },
     {
         id: 7,
-        videoSrc: "/assets/videos/testimonial-7-optimized.mp4",
-        posterSrc: "/assets/videos/testimonial-7-poster.jpg",
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1785916055/testimonial-7-optimized_omvj7i.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916055/testimonial-7-optimized_omvj7i.jpg",
         clientName: "Cru",
     },
 ];

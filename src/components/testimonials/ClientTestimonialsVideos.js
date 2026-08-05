@@ -1,133 +1,34 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
+import LightGallery from "lightgallery/react";
 import { Container } from "../ui";
 import { testimonialVideos } from "@/utils/testimonialVideos";
-import { playVideoWithSound, warmVideo } from "@/utils/videoPlayback";
 
-const TestimonialVideoItem = ({
-    item,
-    isPlaying,
-    onPlay,
-    onPause,
-    onEnded,
-}) => {
-    const videoRef = useRef(null);
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/css/lg-autoplay.css";
+import "lightgallery/css/lg-fullscreen.css";
+import "lightgallery/css/lg-share.css";
+import "lightgallery/css/lg-rotate.css";
+import "lightgallery/css/lg-video.css";
 
-    useEffect(() => {
-        if (!isPlaying && videoRef.current) {
-            videoRef.current.pause();
-        }
-    }, [isPlaying]);
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) warmVideo(video);
-            },
-            { rootMargin: "200px" }
-        );
-
-        observer.observe(video);
-        return () => observer.disconnect();
-    }, [item.videoSrc]);
-
-    useEffect(() => {
-        if (!isPlaying || !videoRef.current) return;
-
-        playVideoWithSound(videoRef.current).catch(() => onPause());
-    }, [isPlaying]);
-
-    const handlePlay = () => onPlay(item.id);
-
-    const handlePause = () => {
-        if (videoRef.current) {
-            videoRef.current.pause();
-        }
-        onPause();
-    };
-
-    return (
-        <div className="flex flex-col gap-[16px]">
-            <div
-                className="relative w-full h-[240px] md:h-[260px] lg:h-[300px] rounded-[12px] overflow-hidden group"
-                onMouseEnter={() => warmVideo(videoRef.current)}
-                onTouchStart={() => warmVideo(videoRef.current)}
-            >
-                <video
-                    ref={videoRef}
-                    src={item.videoSrc}
-                    poster={item.posterSrc}
-                    className="w-full h-full object-cover"
-                    playsInline
-                    preload="metadata"
-                    controls={false}
-                    onEnded={() => onEnded(item.id)}
-                    onPause={() => {
-                        if (isPlaying) onPause();
-                    }}
-                />
-
-                {!isPlaying && (
-                    <button
-                        type="button"
-                        onClick={handlePlay}
-                        className="absolute inset-0 z-10 flex items-center justify-center"
-                        aria-label={`Play ${item.clientName} testimonial`}
-                    >
-                        <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center">
-                            <svg
-                                className="w-[18px] h-[18px] ml-[3px]"
-                                viewBox="0 0 18 20"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M3 2.5L15.5 10L3 17.5V2.5Z"
-                                    fill="white"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </span>
-                    </button>
-                )}
-
-                {isPlaying && (
-                    <button
-                        type="button"
-                        onClick={handlePause}
-                        className="absolute inset-0 z-10 flex items-center justify-center"
-                        aria-label={`Pause ${item.clientName} testimonial`}
-                    >
-                        <span className="w-[52px] h-[52px] rounded-full bg-black/55 backdrop-blur-[2px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                            <svg
-                                className="w-[16px] h-[16px]"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <rect x="2" y="1" width="4" height="14" rx="1" fill="white" />
-                                <rect x="10" y="1" width="4" height="14" rx="1" fill="white" />
-                            </svg>
-                        </span>
-                    </button>
-                )}
-            </div>
-
-            <h4 className="font-card-title text-white">{item.clientName}</h4>
-        </div>
-    );
-};
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgAutoplay from "lightgallery/plugins/autoplay";
+import lgFullscreen from "lightgallery/plugins/fullscreen";
+import lgRotate from "lightgallery/plugins/rotate";
+import lgVideo from "lightgallery/plugins/video";
 
 const ClientTestimonialsVideos = () => {
-    const [playingId, setPlayingId] = useState(null);
+    const lightGalleryRef = useRef(null);
 
-    const handlePlay = (id) => setPlayingId(id);
-    const handlePause = () => setPlayingId(null);
-    const handleEnded = () => setPlayingId(null);
+    const onInit = (detail) => {
+        if (detail) {
+            lightGalleryRef.current = detail.instance;
+        }
+    };
 
     return (
         <section className="lg:py-[80px] md:py-[60px] py-[40px]">
@@ -135,18 +36,75 @@ const ClientTestimonialsVideos = () => {
                 <div className="flex flex-col gap-[30px]">
                     <h2 className="font-title-60 text-white">What our clients say</h2>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]">
-                        {testimonialVideos.map((item) => (
-                            <TestimonialVideoItem
-                                key={item.id}
-                                item={item}
-                                isPlaying={playingId === item.id}
-                                onPlay={handlePlay}
-                                onPause={handlePause}
-                                onEnded={handleEnded}
-                            />
-                        ))}
-                    </div>
+                    <LightGallery
+                        onInit={onInit}
+                        speed={500}
+                        selector=".testimonial-video-item"
+                        mode="lg-fade"
+                        download={false}
+                        autoplayFirstVideo={false}
+                        thumbnail={true}
+                        plugins={[
+                            lgThumbnail,
+                            lgZoom,
+                            lgAutoplay,
+                            lgFullscreen,
+                            lgRotate,
+                            lgVideo,
+                        ]}
+                    >
+                        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-x-[20px] gap-y-[30px] w-full">
+                            {testimonialVideos.map((item) => (
+                                <div key={item.id} className="flex flex-col gap-[16px]">
+                                    <a
+                                        className="testimonial-video-item relative block cursor-pointer group"
+                                        data-lg-size="1280-720"
+                                        data-thumb={item.posterSrc}
+                                        data-video={`{
+    "source": [
+      {
+        "src": "${item.videoSrc}",
+        "type": "video/mp4"
+      }
+    ],
+    "attributes": {
+      "controls": true,
+      "preload": "metadata",
+      "controlsList": "nodownload noplaybackrate",
+      "playsinline": true,
+      "poster": "${item.posterSrc}"
+    }
+  }`}
+                                    >
+                                        <div
+                                            className="relative w-full overflow-hidden rounded-lg"
+                                            style={{ aspectRatio: "3/4" }}
+                                        >
+                                            <img
+                                                src={item.posterSrc}
+                                                alt={`${item.clientName} testimonial`}
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            />
+
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition">
+                                                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-110">
+                                                    <svg
+                                                        className="w-8 h-8 text-black ml-1"
+                                                        viewBox="0 0 24 24"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path d="M8 5v14l11-7z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <h4 className="font-card-title text-white">{item.clientName}</h4>
+                                </div>
+                            ))}
+                        </div>
+                    </LightGallery>
                 </div>
             </Container>
         </section>
