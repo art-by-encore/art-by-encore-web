@@ -55,4 +55,12 @@ export const testimonialVideos = [
             "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1785916055/testimonial-7-optimized_omvj7i.jpg",
         clientName: "Cru",
     },
+    {
+        id: 8,
+        videoSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/v1790240340/portfolio/lmaxx5b1ihovegqme4vq.mp4",
+        posterSrc:
+            "https://res.cloudinary.com/dxe9u5tas/video/upload/so_1/v1790240340/portfolio/lmaxx5b1ihovegqme4vq.jpg",
+        clientName: "Beomtella",
+    },
 ];
