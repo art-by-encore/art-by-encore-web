@@ -1,6 +1,7 @@
 import "./globals.css";
 import { fonts } from "@/fonts/fonts";
 import { SmoothLayout, Header, Footer, LenisSmoothScroll, FloatingButton } from "@/components/layout";
+import SnapPixel from "@/components/layout/SnapPixel";
 import { ViewTransitions } from "next-view-transitions";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
@@ -48,6 +49,9 @@ export default function RootLayout({ children }) {
 
           {/* Google Tag Manager */}
           <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_GTMID || 'GTM-K3Z2SPT7'} />
+
+          {/* Snap Pixel */}
+          <SnapPixel />
           <LoaderProvider>
             <SmoothLayout>
               <Header />
