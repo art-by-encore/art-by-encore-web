@@ -19,6 +19,7 @@ const SnapPixel = () => {
     window.snaptr("track", "PAGE_VIEW");
   }, [pathname]);
 
+  
   return (
     <Script
       id="snap-pixel"
